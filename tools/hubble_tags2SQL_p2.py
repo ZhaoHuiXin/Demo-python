@@ -94,14 +94,15 @@ def handle_bar():
             level_map[items[1]] = {
                 "id": n,
                 "parent_id": level_map[items[0]].get('id'),
-                "prefix": "/" + items[0]
+                "prefix": "".join(["/", str(level_map[items[0]].get('id')), "/"])
             }
         if len(items) > 2:
             n += 1
+            id_list = "/".join([str(level_map[item].get('id')) for item in items[:-1]])
             level_map[items[-1]] = {
                 "id": n,
                 "parent_id": level_map[items[-2]].get('id'),
-                "prefix": "/".join(items[:-1])
+                "prefix": "".join(["/", id_list, "/"])
             }
     for k, v in level_map.items():
         tag_group_sql += """({0},\"{1}\",{2},\"{3}\"),\n""".format(v['id'],
@@ -109,15 +110,14 @@ def handle_bar():
                                                       v['parent_id'],
                                                       v['prefix'])
 
-    res1 = tag_group_sql.strip(",") + ";"
-    # print(res1)
+    res1 = tag_group_sql
 
     for k, v in leaf_latest_group_name_map.items():
         # print(k,v)
         tag_sql += """(\"{0}\",{1}),\n""".format(k, level_map[v].get('id'))
-    res2 = tag_sql.strip(",") + ";"
-    print(res1)
-    print(res2)
+    res2 = tag_sql
+    print(res1.rstrip() + "\b;")
+    print(res2.rstrip() + "\b;")
 
 if __name__ == '__main__':
     with open(PRE_HANDLE_RES, 'w') as wf:
