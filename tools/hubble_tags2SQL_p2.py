@@ -1,7 +1,7 @@
 # encoding:utf-8
 import json
 
-ORIGIN_FILE = "data.json"
+ORIGIN_FILE = "dataV2.json"
 PRE_HANDLE_RES = "format_data.txt"
 TAG_CHAIN_HANDLE_RES = "barData.txt"
 leaf_latest_group_name_map = dict()
@@ -74,8 +74,8 @@ def handle_foo():
 
 
 def handle_bar():
-    tag_group_sql = """insert into tag_group(`id`,`group_name`,`parent_id`,`prefix`) values"""
-    tag_sql = """insert into tag(`name`, `group_id`) values"""
+    tag_group_sql = """insert into tag_groups(`id`,`name`,`parent_id`,`prefix`) values"""
+    tag_sql = """insert into tags(`name`, `tag_group_id`) values"""
     n = 5
     tree_set = set()
     with open(TAG_CHAIN_HANDLE_RES, 'r') as rf:
