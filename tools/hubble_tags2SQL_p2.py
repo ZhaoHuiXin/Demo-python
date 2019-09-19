@@ -1,18 +1,18 @@
 # encoding:utf-8
 import json
 
-ORIGIN_FILE = "dataV2.json"
+ORIGIN_FILE = "dataV3.json"
 PRE_HANDLE_RES = "format_data.txt"
 TAG_CHAIN_HANDLE_RES = "barData.txt"
 leaf_latest_group_name_map = dict()
 group_name_level_map = dict()
 
 level_map = {
-    '通用': {"id": 1, "parent_id": 0, "prefix": "/"},
-    'Det、video': {"id": 2, 'parent_id': 0, "prefix": "/"},
-    'Det': {"id": 3, "parent_id": 0, "prefix": "/"},
-    'video': {"id": 4, "parent_id": 0, "prefix": "/"},
-    'FR': {"id": 5, "parent_id": 0, "prefix": "/"}
+    '全部': {"id": 1, "parent_id": 0, "prefix": "/"},
+    '行人数据': {"id": 2, 'parent_id': 0, "prefix": "/"},
+    '车辆数据': {"id": 3, "parent_id": 0, "prefix": "/"},
+    '人脸检测': {"id": 4, "parent_id": 0, "prefix": "/"},
+    '人脸识别': {"id": 5, "parent_id": 0, "prefix": "/"}
 }
 
 
@@ -26,7 +26,7 @@ def pre_handler(wf):
     def se(item):
         if type(item) is dict:
             for k, v in item.items():
-                if k in ['通用', 'Det、video', 'Det', 'video', 'FR']:
+                if k in ['全部', '行人数据', '车辆数据', '人脸检测', '人脸识别']:
                     wf.write("top_title %s\n" % k)
                 # print(0,k)
                 if type(v) is dict:
