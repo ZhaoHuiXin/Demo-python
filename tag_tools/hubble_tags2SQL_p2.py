@@ -1,7 +1,7 @@
 # encoding:utf-8
 import json
 
-ORIGIN_FILE = "dataV3.json"
+ORIGIN_FILE = "TagDataV3.json"
 PRE_HANDLE_RES = "format_data.txt"
 TAG_CHAIN_HANDLE_RES = "barData.txt"
 leaf_latest_group_name_map = dict()
